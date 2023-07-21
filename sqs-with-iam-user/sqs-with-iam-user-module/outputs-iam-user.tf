@@ -1,15 +1,20 @@
 output "user_info" {
-  value = {
-    name = aws_iam_user.terraform_user_sqs.name
-    path = aws_iam_user.terraform_user_sqs.path
-    tags = aws_iam_user.terraform_user_sqs.tags
-  }
+  value = [
+    for userinfo in aws_iam_user.terraform_user_sqs : {
+      name : userinfo.name
+      path : userinfo.path
+      tags : userinfo.tags
+    }
+  ]
 }
 
 output "access_and_secret_key" {
   sensitive = true
-  value = {
-    access_key = aws_iam_access_key.terraform_user_sqs.id
-    secret_key = aws_iam_access_key.terraform_user_sqs.secret
-  }
+  value = [
+    for user_secrets in aws_iam_access_key.terraform_user_sqs : {
+      name: user_secrets.user
+      access_key : user_secrets.id
+      secret_key : user_secrets.secret
+    }
+  ]
 }
