@@ -1,3 +1,9 @@
+variable "users" {
+  description = "SQS delay seconds"
+  type        = set(string)
+  default     = []
+}
+
 variable "sqs_delay_seconds" {
   description = "SQS delay seconds"
   type        = number

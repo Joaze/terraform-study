@@ -15,6 +15,11 @@ provider "aws" {
 module "sqs_with_iam_user" {
   source = "../sqs-with-iam-user-module"
   #input variables
+  users = [
+    "antonio",
+    "pedro",
+    "lucas"
+  ]
 }
 
 output "iam-user-sqs" {
